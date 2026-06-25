@@ -1,0 +1,31 @@
+version: '3.8'
+
+services:
+  sync-app:
+    build: .
+    image: m3-sync-app:latest
+    container_name: m3-sync-app
+    restart: unless-stopped
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./data:/app/data
+    environment:
+      - PORT=8080
+      - DB_PATH=/app/data/sync.db
+      - NODE_ENV=production
+
+# Metadata configuration block for CasaOS App Store integration
+x-casaos:
+  architectures:
+    - amd64
+    - arm64
+  main: sync-app
+  icon: "https://raw.githubusercontent.com/google/material-design-icons/master/png/action/cloud_done/ios/cloud_done_2x.png"
+  title:
+    en_us: "Omoidasu"
+  description:
+    en_us: "A beautiful, self-hosted Material 3 web app to view, manage, and sync your calendar events, contacts, and notes. Built mobile-first with offline-first local synchronization."
+  developer: "Antigravity"
+  index: "/"
+  port_map: "8080"
