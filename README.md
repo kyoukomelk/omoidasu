@@ -1,6 +1,6 @@
-# Omoidasu (M3 Sync Hub)
+# Omoidasu
 
-Omoidasu is a personal information management suite built on the Material 3 design system. It consolidates calendars, contacts, and notes into a unified, local-first dashboard. The application features multi-account isolation, offline-first persistence, server-side scoping, and WebDAV synchronization.
+Omoidasu is a personal information management suite It consolidates calendars, contacts, and notes into a unified, local-first dashboard. The application features multi-account isolation, offline-first persistence, server-side scoping, and WebDAV synchronization.
 
 ---
 
