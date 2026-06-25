@@ -92,8 +92,8 @@ docker compose up -d
 ```
 The application will bind to port 8080.
 
-### CasaOS Deployment
-1. Open the CasaOS dashboard and select App Store.
+### CasaOS/ZimaOS Deployment
+1. Open the Casa / Zima dashboard and select App Store.
 2. Click Custom Install in the top right.
 3. Choose Import and paste the contents of `docker-compose.yml`.
 4. Submit the configuration. Volume allocations preserve SQLite tables under the local `./data/` folder.
