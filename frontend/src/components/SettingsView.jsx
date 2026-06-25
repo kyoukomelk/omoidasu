@@ -1139,7 +1139,21 @@ export default function SettingsView({ userProfile, onUpdateProfile }) {
                 style={{ padding: '0 12px', height: '32px', minWidth: 'unset', borderRadius: '8px', fontSize: '0.85rem' }}
                 onClick={(e) => {
                   const url = `${window.location.protocol}//${window.location.hostname}:8080/${syncEngine.getActiveUser()?.username}/webdav`;
-                  navigator.clipboard.writeText(url);
+                  try {
+                    if (navigator.clipboard && navigator.clipboard.writeText) {
+                      navigator.clipboard.writeText(url);
+                    } else {
+                      const textarea = document.createElement('textarea');
+                      textarea.value = url;
+                      textarea.style.position = 'fixed';
+                      document.body.appendChild(textarea);
+                      textarea.select();
+                      document.execCommand('copy');
+                      document.body.removeChild(textarea);
+                    }
+                  } catch (err) {
+                    console.error('Failed to copy: ', err);
+                  }
                   const prevText = e.currentTarget.innerText;
                   e.currentTarget.innerText = 'Copied!';
                   setTimeout(() => {
