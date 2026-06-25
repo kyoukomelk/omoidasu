@@ -1,102 +1,99 @@
 # Omoidasu (M3 Sync Hub)
 
-Omoidasu is a premium, responsive, local-first web application designed with the **Material 3 Design System**. It consolidates Calendar events, Contacts, and Notes into a unified dashboard, featuring multi-account support, local-first offline capabilities, server-side data isolation, and a built-in WebDAV synchronization engine.
+Omoidasu is a personal information management suite built on the Material 3 design system. It consolidates calendars, contacts, and notes into a unified, local-first dashboard. The application features multi-account isolation, offline-first persistence, server-side scoping, and WebDAV synchronization.
 
 ---
 
-## ✨ Features
+## Key Features
 
-### 📅 Dashboard & Home
-- **Dynamic Welcome & Header**: Interactive greeting adapting to the time of day with custom animations.
-- **Weather Widget**: Real-time city weather tracking powered by the Open-Meteo Geocoding & Forecast APIs.
-- **Draggable & Customizable Sections**: Customize section orders (Appointments, Favorites, Notes) using native drag-and-drop, and toggle section visibility.
-- **Birthday Alerts**: Automated banners celebrating contact birthdays.
+### Central Dashboard
+* Daily Schedule: Dynamic agenda view matching time-of-day contexts.
+* Weather Integration: Location-based forecast updates retrieved from Open-Meteo geocoding and forecast APIs.
+* Customizable Layout: Layout widgets (Appointments, Favorites, Notes) can be rearranged via native drag-and-drop or toggled for visibility.
+* Birthday Banners: Automated notifications highlighting upcoming contact birthdays.
 
-### 🗓️ Multi-Calendar
-- **Responsive Split Layout**: View calendar dates side-by-side with daily schedules on desktop/tablet viewports, and clean stacking on mobile.
-- **Color-Coded Calendars**: Bulk import `.ics` files to generate distinct, color-coded custom calendars.
-- **Interactive Calendar Manager**: Create, edit, recolor, toggle visibility, and delete multiple calendar structures.
+### Calendars
+* Layout options: Split sidebar view for schedules on desktop/tablet viewports, and vertical stacking for mobile screens.
+* Calendar imports: Bulk upload `.ics` files to construct separate, color-coded calendars.
+* Management Panel: Dedicated dashboard to create, recolor, filter, and delete calendar feeds.
 
-### 📇 Contacts Book
-- **Bulk Importing**: Instantly upload `.vcf` vCards to populate your contacts database.
-- **Avatars**: Initialized letter-badge avatars and base64 profile photo compression.
-- **Favorites Carousel**: Pin vital contacts to the dashboard.
+### Contacts
+* Data Importing: Import standard `.vcf` vCards directly into the contact book.
+* Avatars and Photos: Generates letter-initial badges and compresses profile image uploads locally using HTML5 canvas.
+* Favorites: Pin select contacts to the dashboard for quick navigation.
 
-### 📝 Notes Manager
-- **Markdown & Code Snippets**: Separates prose from code blocks, displaying snippets inside a premium dark theme container with a one-click clipboard copier.
-- **Custom Tagging**: Inline tagging pills with tag filtering buttons.
-- **Photo Attachments**: Upload photos directly into notes, including a fullscreen lightbox with download capabilities.
-- **Checklist Mode**: Switch notes into interactive checklist tasks.
+### Notes
+* Markdown Code Snippets: In-editor rendering of code blocks inside a dark theme preview container with direct clipboard copying.
+* Categorization: Inline tagging with dynamically populated tag filter chips.
+* Attachments: base64 photo attachments, complete with fullscreen lightbox zoom and local download triggers.
+* Checklists: Toggle notes into interactive checklists.
 
-### 🔒 Accounts & Security
-- **Multi-Account Sessions**: Switch accounts locally on a single device or logout, preserving separate local storage keys.
-- **PBKDF2 Password Hashing**: Standard password protection for registered users.
-- **Admin Privilege System**: Designated administrators can promo/demote users and disable user registration settings.
-- **SQLite Scoping**: Entire backend database tables (`events`, `calendars`, `contacts`, `notes`) are scoped securely by `user_id`.
-
----
-
-## 🛠️ Technology Stack
-- **Frontend**: React, Vite, Vanilla CSS (Material 3 tokens, elevations, curves)
-- **Backend**: Node.js, Express, SQLite (`sqlite3` module)
-- **Protocols**: REST API, WebDAV Server integration (for calendar/contacts syncing)
+### Identity & Security
+* Multi-Account Access: Switch local account sessions on the same device without data leakage.
+* Cryptographic Security: Passwords salted and hashed via PBKDF2 stretching.
+* Administrative Operations: Oldest registered user gains root administrator status to promote users and toggle public registration limits.
+* Scoped Data: SQL tables are partitioned by unique user identifiers.
 
 ---
 
-## 🚀 Getting Started
+## Technical Stack
+* Frontend: React, Vite, Vanilla CSS (Material 3 variables and elevation specs)
+* Backend: Node.js, Express, SQLite (via `sqlite3` driver)
+* Sync Protocol: REST API endpoints and WebDAV server integration
+
+---
+
+## Getting Started
 
 ### Prerequisites
-- [Node.js](https://nodejs.org/) (v18+)
-- [npm](https://www.npmjs.com/)
+* Node.js (v18+)
+* npm
 
-### Local Development Setup
+### Local Installation
 
-1. **Clone the repository**:
+1. Clone the repository:
    ```bash
    git clone https://github.com/kyoukomelk/omoidasu.git
    cd omoidasu
    ```
 
-2. **Install Backend Dependencies**:
+2. Install backend dependencies:
    ```bash
    npm install
    ```
 
-3. **Install Frontend Dependencies**:
+3. Install frontend dependencies:
    ```bash
    cd frontend
    npm install
    cd ..
    ```
 
-4. **Run the Application**:
-   You can run the backend and frontend concurrently. 
-   - Start the backend server (on port `8080`):
-     ```bash
-     npm start
-     ```
-   - Start the Vite development server (on port `5173`):
-     ```bash
-     cd frontend
-     npm run dev
-     ```
-   Open your browser and navigate to `http://localhost:5173`.
+4. Run the application:
+   Start the backend API server (port 8080):
+   ```bash
+   npm start
+   ```
+   Start the Vite frontend development server (port 5173):
+   ```bash
+   cd frontend
+   npm run dev
+   ```
+   Open `http://localhost:5173` in your browser.
 
 ---
 
-## 🐳 Docker & CasaOS Deployment
+## Production Deployment
 
-Omoidasu is fully containerized and ready for single-command deployments.
-
-### Running with Docker Compose
-Run the following command at the root directory:
+### Docker Compose
+Deploy the server stack instantly using:
 ```bash
 docker compose up -d
 ```
-The application will build and run on port `8080`.
+The application will bind to port 8080.
 
-### Custom Install in CasaOS
-1. Open the **CasaOS Dashboard**.
-2. Click **App Store** -> **Custom Install** (top-right).
-3. Click **Import** (top-right) and paste the contents of `docker-compose.yml`.
-4. Submit and install. Volume mappings will preserve the database sqlite file under `./data/sync.db`.
+### CasaOS Deployment
+1. Open the CasaOS dashboard and select App Store.
+2. Click Custom Install in the top right.
+3. Choose Import and paste the contents of `docker-compose.yml`.
+4. Submit the configuration. Volume allocations preserve SQLite tables under the local `./data/` folder.
