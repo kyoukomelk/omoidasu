@@ -96,4 +96,7 @@ The application will bind to port 8080.
 1. Open the Casa / Zima dashboard and select App Store.
 2. Click Custom Install in the top right.
 3. Choose Import and paste the contents of `docker-compose.yml`.
-4. Submit the configuration. Volume allocations preserve SQLite tables under the local `./data/` folder.
+4. In the volume configuration section, replace the relative path `./data` with an absolute host path:
+   * If you placed the folder in `/DATA`, use: `/DATA/sync-app/data`
+   * Or use the standard CasaOS app directory: `/DATA/AppData/omoidasu/data`
+5. Submit the configuration and install. Volume allocations will now preserve your SQLite tables.
